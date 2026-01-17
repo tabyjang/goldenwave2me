@@ -1,0 +1,102 @@
+"use client"
+
+import { useState } from "react"
+import { motion, AnimatePresence } from "motion/react"
+import { Menu, X } from "lucide-react"
+import type { SiteConfig } from "@/types/theme"
+
+interface HeaderProps {
+  config: SiteConfig
+}
+
+const navItems = [
+  { href: "#services", label: "서비스" },
+  { href: "#portfolio", label: "포트폴리오" },
+  { href: "#process", label: "프로세스" },
+  { href: "#contact", label: "문의" },
+]
+
+export function Header({ config }: HeaderProps) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50">
+      <div className="absolute inset-0 bg-white/10 backdrop-blur-xl" />
+
+      <nav className="relative max-w-7xl mx-auto px-6 py-4">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <a href="#" className="flex items-center gap-3">
+            <div className="relative h-10 w-10">
+              <div className="absolute inset-0 rounded-full bg-white/20 animate-pulse" />
+              <div className="relative h-full w-full rounded-full bg-white flex items-center justify-center">
+                <span className="text-[#0369a1] font-bold text-lg">G</span>
+              </div>
+            </div>
+            <span className="text-lg font-bold">{config.name}</span>
+          </a>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-sm text-white/80 hover:text-white transition-colors"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <a
+            href="#contact"
+            className="hidden md:flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-[#0369a1] transition hover:bg-white/90"
+          >
+            상담 신청
+          </a>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2"
+          >
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden overflow-hidden"
+            >
+              <div className="py-6 space-y-4">
+                {navItems.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="block text-white/80 hover:text-white transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+                <a
+                  href="#contact"
+                  className="inline-block rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-[#0369a1]"
+                >
+                  상담 신청
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+    </header>
+  )
+}

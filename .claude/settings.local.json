@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git fetch:*)",
+      "Skill(n8n-mcp-tools-expert)"
+    ]
+  }
+}
