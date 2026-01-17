@@ -1,5 +1,5 @@
 import { MainLayout } from "@/components/layout"
-import { Hero, Features, CTA } from "@/components/sections"
+import { Hero, Features, CTA, Testimonials, Process } from "@/components/sections"
 import {
   BarChart3,
   Target,
@@ -7,6 +7,10 @@ import {
   Users,
   TrendingUp,
   Megaphone,
+  Search,
+  Lightbulb,
+  Rocket,
+  LineChart,
 } from "lucide-react"
 
 const features = [
@@ -60,6 +64,60 @@ const services = [
     icon: <TrendingUp className="h-8 w-8" />,
     title: "그로스 해킹",
     description: "데이터 기반 성장 전략 수립",
+  },
+]
+
+const testimonials = [
+  {
+    name: "김민수",
+    role: "마케팅 팀장",
+    company: "테크스타트업",
+    content:
+      "골든웨이브와 함께한 6개월간 광고 ROAS가 250% 향상되었습니다. 데이터 기반 접근과 빠른 최적화가 인상적이었어요.",
+    rating: 5,
+  },
+  {
+    name: "이지은",
+    role: "대표이사",
+    company: "패션 브랜드",
+    content:
+      "인스타그램 마케팅으로 팔로워가 3개월 만에 5만명 돌파했습니다. 콘텐츠 기획력과 실행력이 탁월해요.",
+    rating: 5,
+  },
+  {
+    name: "박준호",
+    role: "CMO",
+    company: "이커머스",
+    content:
+      "투명한 리포팅과 명확한 커뮤니케이션이 좋았습니다. 매출 목표를 달성하는데 큰 도움이 되었어요.",
+    rating: 5,
+  },
+]
+
+const processSteps = [
+  {
+    number: "01",
+    title: "분석",
+    description: "비즈니스 목표, 타겟 고객, 경쟁사를 심층 분석합니다",
+    icon: <Search className="h-10 w-10" />,
+  },
+  {
+    number: "02",
+    title: "전략 수립",
+    description: "데이터 기반으로 최적의 마케팅 전략을 설계합니다",
+    icon: <Lightbulb className="h-10 w-10" />,
+  },
+  {
+    number: "03",
+    title: "실행",
+    description: "광고 집행, 콘텐츠 제작, 캠페인을 빠르게 실행합니다",
+    icon: <Rocket className="h-10 w-10" />,
+  },
+  {
+    number: "04",
+    title: "최적화",
+    description: "실시간 모니터링과 A/B 테스트로 성과를 개선합니다",
+    icon: <LineChart className="h-10 w-10" />,
   },
 ]
 
@@ -145,6 +203,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Process steps={processSteps} />
+
+      <Testimonials testimonials={testimonials} />
 
       <CTA
         title="지금 성장을 시작하세요"

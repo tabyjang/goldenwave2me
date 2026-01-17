@@ -48,7 +48,9 @@ export async function signUpWithEmail(formData: FormData) {
     redirect(`/auth/signup?error=${encodeURIComponent(error.message)}`)
   }
 
-  redirect("/auth/signup?message=Check your email to confirm your account")
+  // Email confirmation disabled, redirect to home
+  revalidatePath("/", "layout")
+  redirect("/")
 }
 
 export async function signInWithOAuth(provider: "github" | "google") {
