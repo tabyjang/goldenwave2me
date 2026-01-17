@@ -1,5 +1,3 @@
-import { setRequestLocale } from "next-intl/server"
-import { getTranslations } from "next-intl/server"
 import { MainLayout } from "@/components/layout"
 import { Hero, Mission, Team } from "@/components/sections"
 import { Target, Heart, Sparkles, Building2 } from "lucide-react"
@@ -10,10 +8,6 @@ export const metadata = constructMetadata({
   description:
     "2015년 설립 이후, 골든웨이브는 대한민국 최고의 퍼포먼스 마케팅 에이전시로 성장했습니다. 데이터 기반 마케팅으로 500개 이상의 브랜드와 함께 성장했습니다.",
 })
-
-interface AboutPageProps {
-  params: Promise<{ locale: string }>
-}
 
 const teamMembers = [
   {
@@ -47,41 +41,39 @@ const historyData = [
   { year: "2024", event: "AI 마케팅 솔루션 런칭" },
 ]
 
-export default async function AboutPage({ params }: AboutPageProps) {
-  const { locale } = await params
-  setRequestLocale(locale)
-
-  const t = await getTranslations("About")
-
+export default function AboutPage() {
   const values = [
     {
       icon: <Target className="h-6 w-6" />,
-      title: t("valueTitle1"),
-      text: t("valueText1"),
+      title: "성과 중심",
+      text: "화려한 보고서가 아닌, 실제 매출과 성장으로 증명합니다. 모든 캠페인은 측정 가능한 KPI로 관리됩니다.",
     },
     {
       icon: <Heart className="h-6 w-6" />,
-      title: t("valueTitle2"),
-      text: t("valueText2"),
+      title: "파트너십",
+      text: "단순 대행사가 아닌 비즈니스 파트너로서 함께합니다. 클라이언트의 사업을 깊이 이해하고 함께 성장합니다.",
     },
     {
       icon: <Sparkles className="h-6 w-6" />,
-      title: t("valueTitle3"),
-      text: t("valueText3"),
+      title: "혁신",
+      text: "빠르게 변화하는 디지털 환경에서 항상 한 발 앞서갑니다. 최신 트렌드와 기술을 적극 도입합니다.",
     },
   ]
 
   return (
     <MainLayout>
-      <Hero title={t("title")} subtitle={t("subtitle")} />
+      <Hero
+        title="회사소개"
+        subtitle="2015년 설립 이후, 골든웨이브는 대한민국 최고의 퍼포먼스 마케팅 에이전시로 성장했습니다."
+      />
       <Mission
-        title={t("missionTitle")}
-        description={t("missionDescription")}
+        title="우리의 미션"
+        description="모든 브랜드에는 성장의 잠재력이 있습니다. 골든웨이브는 데이터와 크리에이티브의 결합으로 그 잠재력을 현실로 만듭니다. 클라이언트의 성공이 곧 우리의 성공입니다."
         values={values}
       />
       <Team
-        title={t("teamTitle")}
-        subtitle={t("teamSubtitle")}
+        title="전문가 팀"
+        subtitle="각 분야 최고의 전문가들이 여러분의 성장을 돕습니다"
         members={teamMembers}
       />
 
@@ -92,9 +84,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-4">
               <Building2 className="h-6 w-6" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              {t("historyTitle")}
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">연혁</h2>
           </div>
           <div className="max-w-3xl mx-auto">
             <div className="relative">

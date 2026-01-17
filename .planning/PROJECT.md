@@ -13,7 +13,7 @@
 - ✓ Next.js 16 + React 19 프레임워크 — existing
 - ✓ 5가지 테마 시스템 (minimal, bold, dark, wave, onepage) — existing
 - ✓ Tailwind CSS 4 스타일링 — existing
-- ✓ 다국어 지원 (한국어, 영어) with next-intl — existing
+- ✓ 한국어 단일 언어 지원 — existing
 - ✓ Supabase 인증 (Google/GitHub OAuth) — existing
 - ✓ 데모 모드 (Supabase 없이 작동) — existing
 - ✓ 템플릿별 Hero 섹션 구현 — existing
@@ -78,8 +78,8 @@ goldenwave-marketing/
 ├── src/
 │   ├── app/                    # Next.js App Router
 │   │   ├── (demo)/            # 템플릿 쇼케이스
-│   │   ├── [locale]/(marketing)/ # 다국어 마케팅 페이지
-│   │   └── [locale]/auth/     # 인증 페이지
+│   │   ├── (marketing)/       # 마케팅 페이지
+│   │   └── auth/              # 인증 페이지
 │   ├── components/
 │   │   ├── ui/                # 공통 UI 컴포넌트
 │   │   ├── sections/          # 재사용 섹션
@@ -90,12 +90,11 @@ goldenwave-marketing/
 │   │       ├── wave/
 │   │       └── onepage/
 │   ├── themes/                # 테마 설정
-│   ├── lib/                   # 유틸리티
-│   │   └── supabase/         # Supabase 클라이언트
-│   └── i18n/                  # 다국어 설정
+│   └── lib/                   # 유틸리티
+│       └── supabase/          # Supabase 클라이언트
 ├── content/blog/              # MDX 블로그 콘텐츠
 ├── e2e/                       # Playwright 테스트
-└── .storybook/               # Storybook 설정
+└── .storybook/                # Storybook 설정
 ```
 
 ## Stakeholders

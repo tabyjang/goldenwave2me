@@ -17,6 +17,11 @@ export function AuthGuard({ children, fallback }: AuthGuardProps) {
 
   useEffect(() => {
     const supabase = createClient()
+    if (!supabase) {
+      setLoading(false)
+      router.push("/auth/signin")
+      return
+    }
 
     // Get initial user
     supabase.auth.getUser().then(({ data: { user } }) => {

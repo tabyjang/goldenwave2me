@@ -1,6 +1,13 @@
 import { MainLayout } from "@/components/layout"
 import { Hero, Features, CTA } from "@/components/sections"
-import { BarChart3, Target, FileText, Users, TrendingUp, Megaphone } from "lucide-react"
+import {
+  BarChart3,
+  Target,
+  FileText,
+  Users,
+  TrendingUp,
+  Megaphone,
+} from "lucide-react"
 
 const features = [
   {
@@ -30,7 +37,12 @@ const stats = [
 ]
 
 const clients = [
-  "삼성전자", "현대자동차", "LG전자", "SK텔레콤", "카카오", "네이버"
+  "삼성전자",
+  "현대자동차",
+  "LG전자",
+  "SK텔레콤",
+  "카카오",
+  "네이버",
 ]
 
 const services = [
@@ -51,7 +63,7 @@ const services = [
   },
 ]
 
-export default function MarketingPage() {
+export default function Home() {
   return (
     <MainLayout>
       <Hero
@@ -62,8 +74,8 @@ export default function MarketingPage() {
           href: "/contact",
         }}
         secondaryCta={{
-          text: "서비스 알아보기",
-          href: "/services",
+          text: "더 알아보기",
+          href: "/about",
         }}
       />
 
@@ -112,14 +124,6 @@ export default function MarketingPage() {
               </div>
             ))}
           </div>
-          <div className="text-center mt-12">
-            <a
-              href="/services"
-              className="inline-flex items-center text-primary hover:underline font-medium"
-            >
-              전체 서비스 보기 →
-            </a>
-          </div>
         </div>
       </section>
 
@@ -131,7 +135,10 @@ export default function MarketingPage() {
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-60">
             {clients.map((client, index) => (
-              <span key={index} className="text-lg font-semibold text-muted-foreground">
+              <span
+                key={index}
+                className="text-lg font-semibold text-muted-foreground"
+              >
                 {client}
               </span>
             ))}

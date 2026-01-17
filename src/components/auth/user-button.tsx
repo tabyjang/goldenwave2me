@@ -22,6 +22,10 @@ export function UserButton() {
 
   useEffect(() => {
     const supabase = createClient()
+    if (!supabase) {
+      setLoading(false)
+      return
+    }
 
     // Get initial user
     supabase.auth.getUser().then(({ data: { user } }) => {
