@@ -74,8 +74,8 @@ export default function Home() {
           href: "/contact",
         }}
         secondaryCta={{
-          text: "더 알아보기",
-          href: "/about",
+          text: "서비스 알아보기",
+          href: "/services",
         }}
       />
 

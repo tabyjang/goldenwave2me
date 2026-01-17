@@ -8,8 +8,11 @@ import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const navLinks = [
+  { href: "/services", label: "서비스" },
+  { href: "/pricing", label: "가격" },
   { href: "/about", label: "회사소개" },
   { href: "/blog", label: "블로그" },
+  { href: "/faq", label: "FAQ" },
 ] as const
 
 export function Header() {
