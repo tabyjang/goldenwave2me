@@ -50,7 +50,7 @@ export function UserButton() {
   if (!user) {
     return (
       <Button asChild size="sm">
-        <Link href="/auth/signin">Sign In</Link>
+        <Link href="/auth/signin">로그인</Link>
       </Button>
     )
   }
@@ -88,10 +88,10 @@ export function UserButton() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href="/dashboard">Dashboard</Link>
+          <Link href="/dashboard">대시보드</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/settings">Settings</Link>
+          <Link href="/settings">설정</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
@@ -100,7 +100,7 @@ export function UserButton() {
               type="submit"
               className="w-full text-left text-destructive"
             >
-              Sign Out
+              로그아웃
             </button>
           </form>
         </DropdownMenuItem>

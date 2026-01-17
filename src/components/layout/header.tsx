@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { Container } from "./container"
 import { ModeToggle } from "@/components/mode-toggle"
+import { UserButton } from "@/components/auth/user-button"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -42,9 +43,7 @@ export function Header() {
           <div className="flex items-center gap-3">
             <div className="hidden md:flex items-center gap-3">
               <ModeToggle />
-              <Link href="/contact">
-                <Button size="sm">상담 신청</Button>
-              </Link>
+              <UserButton />
             </div>
 
             {/* Mobile Menu Button */}
@@ -78,10 +77,8 @@ export function Header() {
               ))}
               <div className="flex items-center gap-3 pt-4 border-t">
                 <ModeToggle />
+                <UserButton />
               </div>
-              <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-                <Button className="w-full">상담 신청</Button>
-              </Link>
             </nav>
           </div>
         )}
