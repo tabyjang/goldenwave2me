@@ -2,13 +2,16 @@
  * CustomThemeBuilder - 커스텀 색상 테마 빌더
  *
  * 사용자가 원하는 Primary, Accent 색상을 직접 선택하여 즉시 적용
+ * react-colorful를 사용한 전문적인 색상 선택기 포함
  */
 
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'motion/react'
-import { Palette, Check, RefreshCw } from 'lucide-react'
+import { HexColorPicker } from 'react-colorful'
+import 'react-colorful/dist/index.css'
+import { motion, AnimatePresence } from 'motion/react'
+import { Palette, Check, RefreshCw, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -31,6 +34,8 @@ export function CustomThemeBuilder({ className, onChange }: CustomThemeBuilderPr
   const [primaryColor, setPrimaryColor] = useState('#C4A77D') // warmElegance primary
   const [accentColor, setAccentColor] = useState('#D4A373') // warmElegance accent
   const [isApplied, setIsApplied] = useState(false)
+  const [showPrimaryPicker, setShowPrimaryPicker] = useState(false)
+  const [showAccentPicker, setShowAccentPicker] = useState(false)
 
   // 인기 색상 프리셋
   const popularColors = [
@@ -123,67 +128,175 @@ export function CustomThemeBuilder({ className, onChange }: CustomThemeBuilderPr
         {/* Primary 색상 선택 */}
         <div>
           <label className="mb-2 block text-sm font-medium">Primary 색상</label>
-          <div className="flex items-center gap-3">
-            <input
-              type="color"
-              value={primaryColor}
-              onChange={(e) => setPrimaryColor(e.target.value)}
-              className="h-12 w-20 cursor-pointer rounded-md border-2 border-border"
-            />
-            <input
-              type="text"
-              value={primaryColor}
-              onChange={(e) => setPrimaryColor(e.target.value)}
-              className="flex-1 rounded-md border border-border bg-background px-3 py-2 text-sm"
-              placeholder="#C4A77D"
-            />
-          </div>
 
-          {/* 인기 색상 프리셋 */}
-          <div className="mt-3 flex flex-wrap gap-2">
-            {popularColors.slice(0, 4).map((preset) => (
-              <button
-                key={preset.name}
-                onClick={() => setPrimaryColor(preset.color)}
-                className="group relative h-8 w-8 rounded-md border-2 border-border transition hover:scale-110"
-                style={{ backgroundColor: preset.color }}
-                title={preset.name}
-              />
-            ))}
-          </div>
+          {/* 색상 선택 버튼 */}
+          <button
+            onClick={() => setShowPrimaryPicker(!showPrimaryPicker)}
+            className="flex w-full items-center gap-3 rounded-lg border-2 border-border bg-card p-3 transition hover:border-primary"
+          >
+            <div
+              className="h-10 w-16 rounded-md shadow-md ring-2 ring-border"
+              style={{ backgroundColor: primaryColor }}
+            />
+            <div className="flex-1 text-left">
+              <p className="text-sm font-medium">Primary 색상</p>
+              <p className="text-xs text-muted-foreground">{primaryColor.toUpperCase()}</p>
+            </div>
+            <ChevronDown
+              className={cn(
+                'h-5 w-5 text-muted-foreground transition-transform',
+                showPrimaryPicker && 'rotate-180'
+              )}
+            />
+          </button>
+
+          {/* 색상 선택기 패널 */}
+          <AnimatePresence>
+            {showPrimaryPicker && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden"
+              >
+                <div className="mt-3 space-y-4 rounded-lg border border-border bg-card p-4">
+                  {/* HexColorPicker */}
+                  <div className="flex justify-center">
+                    <HexColorPicker color={primaryColor} onChange={setPrimaryColor} />
+                  </div>
+
+                  {/* Hex 입력 */}
+                  <div>
+                    <label className="mb-1 block text-xs font-medium text-muted-foreground">
+                      HEX 값
+                    </label>
+                    <input
+                      type="text"
+                      value={primaryColor}
+                      onChange={(e) => {
+                        const value = e.target.value
+                        if (/^#[0-9A-Fa-f]{0,6}$/.test(value)) {
+                          setPrimaryColor(value)
+                        }
+                      }}
+                      className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm font-mono"
+                      placeholder="#C4A77D"
+                    />
+                  </div>
+
+                  {/* 인기 색상 프리셋 */}
+                  <div>
+                    <label className="mb-2 block text-xs font-medium text-muted-foreground">
+                      인기 색상
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {popularColors.slice(0, 4).map((preset) => (
+                        <button
+                          key={preset.name}
+                          onClick={() => setPrimaryColor(preset.color)}
+                          className="group relative h-9 w-9 rounded-md border-2 border-border transition hover:scale-110 hover:border-primary"
+                          style={{ backgroundColor: preset.color }}
+                          title={preset.name}
+                        >
+                          {primaryColor.toUpperCase() === preset.color.toUpperCase() && (
+                            <Check className="absolute inset-0 m-auto h-5 w-5 text-white drop-shadow-md" />
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Accent 색상 선택 */}
         <div>
           <label className="mb-2 block text-sm font-medium">Accent 색상</label>
-          <div className="flex items-center gap-3">
-            <input
-              type="color"
-              value={accentColor}
-              onChange={(e) => setAccentColor(e.target.value)}
-              className="h-12 w-20 cursor-pointer rounded-md border-2 border-border"
-            />
-            <input
-              type="text"
-              value={accentColor}
-              onChange={(e) => setAccentColor(e.target.value)}
-              className="flex-1 rounded-md border border-border bg-background px-3 py-2 text-sm"
-              placeholder="#D4A373"
-            />
-          </div>
 
-          {/* 인기 색상 프리셋 */}
-          <div className="mt-3 flex flex-wrap gap-2">
-            {popularColors.slice(4, 8).map((preset) => (
-              <button
-                key={preset.name}
-                onClick={() => setAccentColor(preset.color)}
-                className="group relative h-8 w-8 rounded-md border-2 border-border transition hover:scale-110"
-                style={{ backgroundColor: preset.color }}
-                title={preset.name}
-              />
-            ))}
-          </div>
+          {/* 색상 선택 버튼 */}
+          <button
+            onClick={() => setShowAccentPicker(!showAccentPicker)}
+            className="flex w-full items-center gap-3 rounded-lg border-2 border-border bg-card p-3 transition hover:border-primary"
+          >
+            <div
+              className="h-10 w-16 rounded-md shadow-md ring-2 ring-border"
+              style={{ backgroundColor: accentColor }}
+            />
+            <div className="flex-1 text-left">
+              <p className="text-sm font-medium">Accent 색상</p>
+              <p className="text-xs text-muted-foreground">{accentColor.toUpperCase()}</p>
+            </div>
+            <ChevronDown
+              className={cn(
+                'h-5 w-5 text-muted-foreground transition-transform',
+                showAccentPicker && 'rotate-180'
+              )}
+            />
+          </button>
+
+          {/* 색상 선택기 패널 */}
+          <AnimatePresence>
+            {showAccentPicker && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden"
+              >
+                <div className="mt-3 space-y-4 rounded-lg border border-border bg-card p-4">
+                  {/* HexColorPicker */}
+                  <div className="flex justify-center">
+                    <HexColorPicker color={accentColor} onChange={setAccentColor} />
+                  </div>
+
+                  {/* Hex 입력 */}
+                  <div>
+                    <label className="mb-1 block text-xs font-medium text-muted-foreground">
+                      HEX 값
+                    </label>
+                    <input
+                      type="text"
+                      value={accentColor}
+                      onChange={(e) => {
+                        const value = e.target.value
+                        if (/^#[0-9A-Fa-f]{0,6}$/.test(value)) {
+                          setAccentColor(value)
+                        }
+                      }}
+                      className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm font-mono"
+                      placeholder="#D4A373"
+                    />
+                  </div>
+
+                  {/* 인기 색상 프리셋 */}
+                  <div>
+                    <label className="mb-2 block text-xs font-medium text-muted-foreground">
+                      인기 색상
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {popularColors.slice(4, 8).map((preset) => (
+                        <button
+                          key={preset.name}
+                          onClick={() => setAccentColor(preset.color)}
+                          className="group relative h-9 w-9 rounded-md border-2 border-border transition hover:scale-110 hover:border-primary"
+                          style={{ backgroundColor: preset.color }}
+                          title={preset.name}
+                        >
+                          {accentColor.toUpperCase() === preset.color.toUpperCase() && (
+                            <Check className="absolute inset-0 m-auto h-5 w-5 text-white drop-shadow-md" />
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* 미리보기 */}
