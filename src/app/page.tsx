@@ -135,6 +135,10 @@ export default function Home() {
           text: "서비스 알아보기",
           href: "/services",
         }}
+        tertiaryCta={{
+          text: "🎨 테마 데모 체험",
+          href: "/theme-demo",
+        }}
       />
 
       {/* Stats Section */}
