@@ -47,73 +47,131 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
+/* ============================================================================
+   Design Token System - Warm Elegance Color Package
+
+   토큰 시스템 (/tokens)에서 생성된 색상 변수입니다.
+   기본 색상 패키지: Warm Elegance (따뜻한 우아함)
+   ============================================================================ */
+
 :root {
+  /* Radius */
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+
+  /* Background & Foreground (라이트 모드) */
+  --background: oklch(1 0 0);              /* 순수 흰색 */
+  --foreground: #0C0A09;                   /* neutral-950 */
+
+  /* Card */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: #0C0A09;
+
+  /* Popover */
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --popover-foreground: #0C0A09;
+
+  /* Primary (Warm Elegance 브랜드 컬러) */
+  --primary: #C4A77D;                      /* primary-500 */
+  --primary-foreground: #FAF8F5;           /* primary-50 */
+
+  /* Secondary */
+  --secondary: #F5F5F4;                    /* neutral-100 */
+  --secondary-foreground: #1C1917;         /* neutral-900 */
+
+  /* Muted */
+  --muted: #F5F5F4;                        /* neutral-100 */
+  --muted-foreground: #78716C;             /* neutral-500 */
+
+  /* Accent (Warm Elegance 강조 컬러) */
+  --accent: #FAEFE0;                       /* accent-100 */
+  --accent-foreground: #4A3220;            /* accent-950 */
+
+  /* Destructive (Error 색상) */
+  --destructive: #EF4444;                  /* error-500 */
+  --destructive-foreground: #FEF2F2;       /* error-50 */
+
+  /* Border & Input */
+  --border: #E7E5E4;                       /* neutral-200 */
+  --input: #E7E5E4;                        /* neutral-200 */
+
+  /* Ring (포커스 아웃라인) */
+  --ring: #D9C5A7;                         /* primary-400 */
+
+  /* Chart Colors (데이터 시각화) */
+  --chart-1: #C4A77D;                      /* primary-500 */
+  --chart-2: #D4A373;                      /* accent-500 */
+  --chart-3: #3B82F6;                      /* info-500 */
+  --chart-4: #22C55E;                      /* success-500 */
+  --chart-5: #F59E0B;                      /* warning-500 */
+
+  /* Sidebar */
+  --sidebar: #FAFAF9;                      /* neutral-50 */
+  --sidebar-foreground: #1C1917;           /* neutral-900 */
+  --sidebar-primary: #C4A77D;              /* primary-500 */
+  --sidebar-primary-foreground: #FAF8F5;   /* primary-50 */
+  --sidebar-accent: #FAEFE0;               /* accent-100 */
+  --sidebar-accent-foreground: #4A3220;    /* accent-950 */
+  --sidebar-border: #E7E5E4;               /* neutral-200 */
+  --sidebar-ring: #D9C5A7;                 /* primary-400 */
 }
 
+/* Dark Mode - Warm Elegance */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* Background & Foreground (다크 모드) */
+  --background: #0C0A09;                   /* neutral-950 */
+  --foreground: #FAFAF9;                   /* neutral-50 */
+
+  /* Card */
+  --card: #1C1917;                         /* neutral-900 */
+  --card-foreground: #FAFAF9;              /* neutral-50 */
+
+  /* Popover */
+  --popover: #1C1917;                      /* neutral-900 */
+  --popover-foreground: #FAFAF9;           /* neutral-50 */
+
+  /* Primary (다크모드에서는 밝은 톤 사용) */
+  --primary: #D9C5A7;                      /* primary-400 */
+  --primary-foreground: #3E3120;           /* primary-950 */
+
+  /* Secondary */
+  --secondary: #292524;                    /* neutral-800 */
+  --secondary-foreground: #FAFAF9;         /* neutral-50 */
+
+  /* Muted */
+  --muted: #292524;                        /* neutral-800 */
+  --muted-foreground: #A8A29E;             /* neutral-400 */
+
+  /* Accent */
+  --accent: #8A5D3C;                       /* accent-800 */
+  --accent-foreground: #FDF8F3;            /* accent-50 */
+
+  /* Destructive (다크모드) */
+  --destructive: #DC2626;                  /* error-600 */
+  --destructive-foreground: #FEF2F2;       /* error-50 */
+
+  /* Border & Input */
+  --border: #292524;                       /* neutral-800 */
+  --input: #44403C;                        /* neutral-700 */
+
+  /* Ring */
+  --ring: #D9C5A7;                         /* primary-400 */
+
+  /* Chart Colors (다크모드) */
+  --chart-1: #D9C5A7;                      /* primary-400 */
+  --chart-2: #EFCEA2;                      /* accent-400 */
+  --chart-3: #60A5FA;                      /* info-400 */
+  --chart-4: #4ADE80;                      /* success-400 */
+  --chart-5: #FBBF24;                      /* warning-400 */
+
+  /* Sidebar (다크모드) */
+  --sidebar: #1C1917;                      /* neutral-900 */
+  --sidebar-foreground: #FAFAF9;           /* neutral-50 */
+  --sidebar-primary: #D9C5A7;              /* primary-400 */
+  --sidebar-primary-foreground: #3E3120;   /* primary-950 */
+  --sidebar-accent: #8A5D3C;               /* accent-800 */
+  --sidebar-accent-foreground: #FDF8F3;    /* accent-50 */
+  --sidebar-border: #292524;               /* neutral-800 */
+  --sidebar-ring: #D9C5A7;                 /* primary-400 */
 }
 
 @layer base {
