@@ -15,6 +15,10 @@ interface HeroProps {
     text: string
     href: string
   }
+  tertiaryCta?: {
+    text: string
+    href: string
+  }
   showDemo?: boolean
 }
 
@@ -23,6 +27,7 @@ export function Hero({
   subtitle,
   primaryCta,
   secondaryCta,
+  tertiaryCta,
   showDemo = false,
 }: HeroProps) {
   return (
@@ -41,7 +46,7 @@ export function Hero({
                 {subtitle}
               </p>
             </SlideIn>
-            {(primaryCta || secondaryCta) && (
+            {(primaryCta || secondaryCta || tertiaryCta) && (
               <SlideIn direction="up" delay={0.2}>
                 <div className="flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
                   {primaryCta && (
@@ -52,6 +57,11 @@ export function Hero({
                   {secondaryCta && (
                     <AnimatedButton variant="outline" asChild size="lg">
                       <a href={secondaryCta.href}>{secondaryCta.text}</a>
+                    </AnimatedButton>
+                  )}
+                  {tertiaryCta && (
+                    <AnimatedButton variant="secondary" asChild size="lg">
+                      <a href={tertiaryCta.href}>{tertiaryCta.text}</a>
                     </AnimatedButton>
                   )}
                 </div>
