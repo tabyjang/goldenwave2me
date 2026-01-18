@@ -5,7 +5,7 @@
  */
 
 import { ColorPackagePicker, IndustryMatcher, ThemePreview } from '@/components/theme-switcher'
-import { Container } from '@/components/ui/container'
+import { Container } from '@/components/layout/container'
 
 export const metadata = {
   title: '테마 전환 데모 - GoldenWave2Me',
