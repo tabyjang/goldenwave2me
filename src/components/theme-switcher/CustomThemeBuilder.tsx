@@ -9,7 +9,6 @@
 
 import { useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
-import 'react-colorful/dist/index.css'
 import { motion, AnimatePresence } from 'motion/react'
 import { Palette, Check, RefreshCw, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
