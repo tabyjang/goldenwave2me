@@ -12,3 +12,6 @@ export type { IndustryMatcherProps } from './IndustryMatcher'
 
 export { ThemePreview } from './ThemePreview'
 export type { ThemePreviewProps } from './ThemePreview'
+
+export { CustomThemeBuilder } from './CustomThemeBuilder'
+export type { CustomThemeBuilderProps } from './CustomThemeBuilder'
