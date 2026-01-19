@@ -1,4 +1,4 @@
-export { Hero } from "./hero"
+export { Hero } from "./Hero"
 export { Features } from "./features"
 export { CTA } from "./cta"
 export { Mission } from "./mission"
