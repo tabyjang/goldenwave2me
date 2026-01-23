@@ -7,6 +7,9 @@ import { headers } from "next/headers"
 
 export async function signInWithEmail(formData: FormData) {
   const supabase = await createClient()
+  if (!supabase) {
+    redirect("/auth/signin?error=Authentication not configured")
+  }
 
   const email = formData.get("email") as string
   const password = formData.get("password") as string
@@ -26,6 +29,9 @@ export async function signInWithEmail(formData: FormData) {
 
 export async function signUpWithEmail(formData: FormData) {
   const supabase = await createClient()
+  if (!supabase) {
+    redirect("/auth/signup?error=Authentication not configured")
+  }
   const headersList = await headers()
   const origin = headersList.get("origin")
 
@@ -55,6 +61,9 @@ export async function signUpWithEmail(formData: FormData) {
 
 export async function signInWithOAuth(provider: "github" | "google") {
   const supabase = await createClient()
+  if (!supabase) {
+    redirect("/auth/signin?error=Authentication not configured")
+  }
   const headersList = await headers()
   const origin = headersList.get("origin")
 
@@ -76,6 +85,9 @@ export async function signInWithOAuth(provider: "github" | "google") {
 
 export async function signOut() {
   const supabase = await createClient()
+  if (!supabase) {
+    redirect("/")
+  }
 
   await supabase.auth.signOut()
 
@@ -85,6 +97,9 @@ export async function signOut() {
 
 export async function resetPassword(formData: FormData) {
   const supabase = await createClient()
+  if (!supabase) {
+    redirect("/auth/forgot-password?error=Authentication not configured")
+  }
   const headersList = await headers()
   const origin = headersList.get("origin")
 
@@ -103,6 +118,9 @@ export async function resetPassword(formData: FormData) {
 
 export async function updatePassword(formData: FormData) {
   const supabase = await createClient()
+  if (!supabase) {
+    redirect("/auth/update-password?error=Authentication not configured")
+  }
 
   const password = formData.get("password") as string
 

@@ -1,22 +1,25 @@
 "use client"
 
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { Container } from "./container"
 import { ModeToggle } from "@/components/mode-toggle"
-import { UserButton } from "@/components/auth/user-button"
+import { LanguageSwitcher } from "@/components/language-switcher"
+import { ThemeSwitcher } from "@/components/theme-switcher"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const navLinks = [
-  { href: "/services", label: "서비스" },
-  { href: "/pricing", label: "가격" },
-  { href: "/about", label: "회사소개" },
-  { href: "/blog", label: "블로그" },
-  { href: "/faq", label: "FAQ" },
+  { href: "/services", key: "services" },
+  { href: "/pricing", key: "pricing" },
+  { href: "/about", key: "about" },
+  { href: "/blog", key: "blog" },
+  { href: "/faq", key: "faq" },
 ] as const
 
 export function Header() {
+  const t = useTranslations("Common")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -24,7 +27,7 @@ export function Header() {
       <Container>
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="font-bold text-xl">
-            골든웨이브
+            {t("siteName")}
           </Link>
 
           {/* Desktop Navigation */}
@@ -35,15 +38,19 @@ export function Header() {
                 href={link.href}
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
-                {link.label}
+                {t(link.key)}
               </Link>
             ))}
           </nav>
 
           <div className="flex items-center gap-3">
             <div className="hidden md:flex items-center gap-3">
+              <ThemeSwitcher />
+              <LanguageSwitcher />
               <ModeToggle />
-              <UserButton />
+              <Link href="/contact">
+                <Button size="sm">{t("getStarted")}</Button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -72,13 +79,17 @@ export function Header() {
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  {link.label}
+                  {t(link.key)}
                 </Link>
               ))}
               <div className="flex items-center gap-3 pt-4 border-t">
+                <ThemeSwitcher />
+                <LanguageSwitcher />
                 <ModeToggle />
-                <UserButton />
               </div>
+              <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+                <Button className="w-full">{t("getStarted")}</Button>
+              </Link>
             </nav>
           </div>
         )}

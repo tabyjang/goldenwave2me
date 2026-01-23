@@ -19,7 +19,6 @@ export function AuthGuard({ children, fallback }: AuthGuardProps) {
     const supabase = createClient()
     if (!supabase) {
       setLoading(false)
-      router.push("/auth/signin")
       return
     }
 

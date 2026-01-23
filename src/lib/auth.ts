@@ -6,6 +6,9 @@ import { createClient } from "@/lib/supabase/server"
  */
 export async function getCurrentUser() {
   const supabase = await createClient()
+  if (!supabase) {
+    return null
+  }
   const {
     data: { user },
   } = await supabase.auth.getUser()
@@ -25,6 +28,9 @@ export async function isAuthenticated() {
  */
 export async function getSession() {
   const supabase = await createClient()
+  if (!supabase) {
+    return null
+  }
   const {
     data: { session },
   } = await supabase.auth.getSession()
