@@ -7,3 +7,4 @@ export * from "./label"
 
 // Custom UI components
 export * from "./aurora-background"
+export * from "./animated-hero"
