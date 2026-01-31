@@ -211,4 +211,166 @@
     opacity: 0.9;
     transform: translateY(-1px);
   }
+
+  /* ===== GRADIENT UTILITIES ===== */
+
+  /* Primary Gradient - Pink to Cyan */
+  .gradient-primary {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+  }
+
+  /* Secondary Gradient - Soft Pink */
+  .gradient-secondary {
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+  }
+
+  /* CTA Gradient - Cyan to Pink */
+  .gradient-cta {
+    background: linear-gradient(135deg, var(--cta), var(--primary));
+  }
+
+  /* Aurora Gradient - Multi-color blend */
+  .gradient-aurora {
+    background: linear-gradient(
+      135deg,
+      oklch(0.65 0.25 350) 0%,
+      oklch(0.75 0.15 350) 25%,
+      oklch(0.7 0.15 195) 50%,
+      oklch(0.6 0.2 280) 75%,
+      oklch(0.65 0.25 350) 100%
+    );
+  }
+
+  .dark .gradient-aurora {
+    background: linear-gradient(
+      135deg,
+      oklch(0.45 0.2 350) 0%,
+      oklch(0.5 0.12 350) 25%,
+      oklch(0.45 0.12 195) 50%,
+      oklch(0.4 0.15 280) 75%,
+      oklch(0.45 0.2 350) 100%
+    );
+  }
+
+  /* Radial Gradient */
+  .gradient-radial {
+    background: radial-gradient(
+      ellipse at center,
+      var(--primary) 0%,
+      transparent 70%
+    );
+  }
+
+  /* Mesh Gradient Background */
+  .gradient-mesh {
+    background:
+      radial-gradient(at 40% 20%, oklch(0.65 0.25 350 / 0.3) 0%, transparent 50%),
+      radial-gradient(at 80% 0%, oklch(0.7 0.15 195 / 0.3) 0%, transparent 50%),
+      radial-gradient(at 0% 50%, oklch(0.75 0.15 350 / 0.3) 0%, transparent 50%),
+      radial-gradient(at 80% 50%, oklch(0.6 0.2 280 / 0.25) 0%, transparent 50%),
+      radial-gradient(at 0% 100%, oklch(0.7 0.15 195 / 0.2) 0%, transparent 50%),
+      var(--background);
+  }
+
+  .dark .gradient-mesh {
+    background:
+      radial-gradient(at 40% 20%, oklch(0.45 0.2 350 / 0.2) 0%, transparent 50%),
+      radial-gradient(at 80% 0%, oklch(0.45 0.12 195 / 0.2) 0%, transparent 50%),
+      radial-gradient(at 0% 50%, oklch(0.5 0.12 350 / 0.2) 0%, transparent 50%),
+      radial-gradient(at 80% 50%, oklch(0.4 0.15 280 / 0.15) 0%, transparent 50%),
+      radial-gradient(at 0% 100%, oklch(0.45 0.12 195 / 0.15) 0%, transparent 50%),
+      var(--background);
+  }
+
+  /* Animated Gradient Border */
+  .gradient-border {
+    position: relative;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--primary), var(--accent), var(--primary));
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  /* Glow Effect */
+  .glow-primary {
+    box-shadow: 0 0 20px oklch(0.65 0.25 350 / 0.4);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 20px oklch(0.7 0.15 195 / 0.4);
+  }
+
+  /* Shimmer Animation */
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      oklch(1 0 0 / 0.1) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* Aurora Animation Keyframes */
+  @keyframes aurora-shift {
+    0%, 100% {
+      opacity: 1;
+      transform: translateX(0) translateY(0) scale(1);
+    }
+    25% {
+      opacity: 0.8;
+      transform: translateX(5%) translateY(-5%) scale(1.05);
+    }
+    50% {
+      opacity: 1;
+      transform: translateX(-5%) translateY(5%) scale(0.95);
+    }
+    75% {
+      opacity: 0.9;
+      transform: translateX(3%) translateY(3%) scale(1.02);
+    }
+  }
+
+  @keyframes aurora-pulse {
+    0%, 100% {
+      filter: blur(60px);
+      opacity: 0.6;
+    }
+    50% {
+      filter: blur(80px);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
 }
