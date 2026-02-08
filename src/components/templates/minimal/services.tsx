@@ -3,6 +3,11 @@
 import { motion } from "motion/react"
 import { Globe, FileText, Zap, ArrowRight, Check, Sparkles } from "lucide-react"
 import type { SiteConfig } from "@/types/theme"
+import {
+  BentoGrid,
+  BentoCard,
+  BentoCardContent,
+} from "@/components/ui/bento-grid"
 
 interface ServicesProps {
   config: SiteConfig
@@ -12,6 +17,13 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Globe,
   FileText,
   Zap,
+}
+
+// Bento layout pattern: first card is 2x2, rest are 1x1
+const getSizeForIndex = (index: number, total: number): "1x1" | "2x1" | "1x2" | "2x2" => {
+  if (index === 0) return "2x2"
+  if (total > 4 && index === 3) return "2x1"
+  return "1x1"
 }
 
 export function Services({ config }: ServicesProps) {
@@ -56,53 +68,76 @@ export function Services({ config }: ServicesProps) {
           </p>
         </motion.div>
 
-        {/* Services Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {/* Bento Grid Services */}
+        <BentoGrid columns={3}>
           {services.map((service, index) => {
             const Icon = iconMap[service.icon] || Globe
-            const isLarge = index === 0
+            const size = getSizeForIndex(index, services.length)
+            const isLarge = size === "2x2" || size === "2x1"
 
             return (
-              <motion.div
+              <BentoCard
                 key={service.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`group relative ${isLarge ? "lg:col-span-2 lg:row-span-2" : ""}`}
+                size={size}
+                variant={index === 0 ? "gradient" : "default"}
+                index={index}
+                className="group"
               >
-                <div className={`relative h-full overflow-hidden rounded-3xl bg-[var(--color-card)] border border-[var(--color-border)] transition-all duration-500 hover:shadow-2xl hover:shadow-[var(--color-secondary)]/10 hover:border-[var(--color-secondary)]/30 hover:-translate-y-1 ${isLarge ? "p-10" : "p-8"}`}>
-                  {/* Gradient Border Effect */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[var(--color-secondary)]/0 via-transparent to-[var(--color-primary)]/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ padding: "1px" }} />
+                {/* Icon */}
+                <div
+                  className={`mb-6 inline-flex items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--color-secondary)]/10 to-[var(--color-primary)]/10 transition-all duration-300 group-hover:from-[var(--color-secondary)] group-hover:to-[var(--color-primary)] group-hover:shadow-lg group-hover:shadow-[var(--color-secondary)]/30 ${
+                    isLarge ? "h-16 w-16" : "h-14 w-14"
+                  }`}
+                >
+                  <Icon
+                    className={`${
+                      isLarge ? "h-8 w-8" : "h-7 w-7"
+                    } text-[var(--color-secondary)] transition-colors group-hover:text-white`}
+                  />
+                </div>
 
-                  {/* Icon */}
-                  <div className={`mb-6 inline-flex items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--color-secondary)]/10 to-[var(--color-primary)]/10 transition-all duration-300 group-hover:from-[var(--color-secondary)] group-hover:to-[var(--color-primary)] group-hover:shadow-lg group-hover:shadow-[var(--color-secondary)]/30 ${isLarge ? "h-16 w-16" : "h-14 w-14"}`}>
-                    <Icon className={`${isLarge ? "h-8 w-8" : "h-7 w-7"} text-[var(--color-secondary)] transition-colors group-hover:text-white`} />
-                  </div>
+                {/* Content */}
+                <h3
+                  className={`mb-3 font-bold ${isLarge ? "text-2xl" : "text-xl"}`}
+                >
+                  {service.title}
+                </h3>
+                <p
+                  className={`mb-6 text-[var(--color-muted-foreground)] leading-relaxed ${
+                    isLarge ? "text-lg" : ""
+                  }`}
+                >
+                  {service.description}
+                </p>
 
-                  {/* Content */}
-                  <h3 className={`mb-3 font-bold ${isLarge ? "text-2xl" : "text-xl"}`}>
-                    {service.title}
-                  </h3>
-                  <p className={`mb-6 text-[var(--color-muted-foreground)] leading-relaxed ${isLarge ? "text-lg" : ""}`}>
-                    {service.description}
-                  </p>
-
-                  {/* Features */}
-                  {service.features && (
-                    <ul className={`mb-8 space-y-3 ${isLarge ? "grid grid-cols-2 gap-x-6 gap-y-3 space-y-0" : ""}`}>
-                      {service.features.slice(0, isLarge ? 6 : 4).map((feature, i) => (
-                        <li key={i} className="flex items-center gap-3 text-sm">
-                          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--color-secondary)]/10">
-                            <Check className="h-3 w-3 text-[var(--color-secondary)]" />
-                          </span>
-                          <span className="text-[var(--color-muted-foreground)]">{feature}</span>
-                        </li>
-                      ))}
+                {/* Features - shown in large cards */}
+                {service.features && isLarge && (
+                  <BentoCardContent position="bottom" className="mt-auto">
+                    <ul
+                      className={`mb-6 ${
+                        size === "2x2"
+                          ? "grid grid-cols-2 gap-x-6 gap-y-3"
+                          : "space-y-3"
+                      }`}
+                    >
+                      {service.features
+                        .slice(0, size === "2x2" ? 6 : 4)
+                        .map((feature, i) => (
+                          <li key={i} className="flex items-center gap-3 text-sm">
+                            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-secondary)]/10">
+                              <Check className="h-3 w-3 text-[var(--color-secondary)]" />
+                            </span>
+                            <span className="text-[var(--color-muted-foreground)]">
+                              {feature}
+                            </span>
+                          </li>
+                        ))}
                     </ul>
-                  )}
+                  </BentoCardContent>
+                )}
 
-                  {/* Link */}
+                {/* Link */}
+                <div className={isLarge ? "" : "mt-auto pt-4"}>
                   <a
                     href={service.href || "#"}
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-secondary)] transition-all group-hover:gap-3"
@@ -110,14 +145,11 @@ export function Services({ config }: ServicesProps) {
                     자세히 보기
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </a>
-
-                  {/* Corner Decoration */}
-                  <div className="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-gradient-to-br from-[var(--color-secondary)]/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
-              </motion.div>
+              </BentoCard>
             )
           })}
-        </div>
+        </BentoGrid>
 
         {/* Bottom CTA */}
         <motion.div

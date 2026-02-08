@@ -8,3 +8,5 @@ export * from "./label"
 // Custom UI components
 export * from "./aurora-background"
 export * from "./animated-hero"
+export * from "./bento-grid"
+export * from "./glass-card"

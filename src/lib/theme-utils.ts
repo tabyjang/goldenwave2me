@@ -7,6 +7,7 @@
 
 'use client'
 
+import { useState } from 'react'
 import { getAllPackages, getColorPackage, type ColorPackage } from '@/tokens'
 
 // ============================================================================
@@ -196,7 +197,7 @@ export function recommendPackageForIndustry(industry: IndustryType): ColorPackag
  * const { currentPackage, setPackage, availablePackages } = useColorPackage()
  */
 export function useColorPackage() {
-  const [current, setCurrent] = React.useState<ColorPackageName>(getActivePackageName())
+  const [current, setCurrent] = useState<ColorPackageName>(getActivePackageName())
 
   const setPackage = (name: ColorPackageName) => {
     if (setColorPackage(name)) {

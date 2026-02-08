@@ -1,5 +1,5 @@
 export { Hero, CompactHero } from "./hero"
-export { Features } from "./features"
+export { Features, FeaturesLegacy } from "./features"
 export { CTA } from "./cta"
 export { Mission } from "./mission"
 export { Team } from "./team"

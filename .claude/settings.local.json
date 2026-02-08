@@ -4,5 +4,9 @@
       "Bash(git fetch:*)",
       "Skill(n8n-mcp-tools-expert)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "n8n-mcp"
+  ],
+  "enableAllProjectMcpServers": true
 }

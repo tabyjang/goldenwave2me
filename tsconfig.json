@@ -19,9 +19,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@/tokens": ["./tokens"],
-      "@/tokens/*": ["./tokens/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": [
