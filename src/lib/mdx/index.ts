@@ -7,6 +7,23 @@ import type { BlogFrontmatter, BlogPost, BlogPostMeta } from "./types"
 
 const CONTENT_PATH = path.join(process.cwd(), "content/blog")
 
+function normalizeInlineStrongSyntax(source: string): string {
+  const fencePattern = /(```[\s\S]*?```)/g
+
+  return source
+    .split(fencePattern)
+    .map((segment) => {
+      if (segment.startsWith("```")) {
+        return segment
+      }
+
+      return segment.replace(/\*\*([^\n*][\s\S]*?[^\n*]?)\*\*/g, (_match, content) => {
+        return `<strong>${content}</strong>`
+      })
+    })
+    .join("")
+}
+
 /**
  * 모든 포스트 메타데이터 조회 (목록용)
  */
@@ -50,8 +67,10 @@ export async function getPostBySlug(
 
   const source = fs.readFileSync(filePath, "utf-8")
 
+  const normalizedSource = normalizeInlineStrongSyntax(source)
+
   const { content, frontmatter } = await compileMDX<BlogFrontmatter>({
-    source,
+    source: normalizedSource,
     options: { parseFrontmatter: true },
     components: mdxComponents,
   })

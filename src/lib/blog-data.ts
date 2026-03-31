@@ -15,7 +15,7 @@ export interface BlogPost {
 const posts: BlogPost[] = [
   {
     slug: "getting-started-with-nextjs",
-    title: "Getting Started with Next.js 14",
+    title: "Getting Started with Next.js",
     excerpt:
       "Learn how to build modern web applications with Next.js 14 and the App Router. This comprehensive guide covers everything you need to know.",
     content: `
@@ -47,7 +47,7 @@ const posts: BlogPost[] = [
   },
   {
     slug: "tailwind-css-best-practices",
-    title: "Tailwind CSS Best Practices for 2026",
+    title: "Tailwind CSS Best Practices",
     excerpt:
       "Discover the best practices for using Tailwind CSS in your projects. From organization to optimization, we cover it all.",
     content: `

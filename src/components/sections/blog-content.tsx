@@ -53,6 +53,7 @@ export function BlogContent({ post }: BlogContentProps) {
               prose-headings:font-bold prose-headings:tracking-tight
               prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
               prose-p:text-muted-foreground prose-p:leading-relaxed
+              prose-strong:text-foreground prose-strong:font-semibold
               prose-a:text-primary prose-a:no-underline hover:prose-a:underline
               prose-ul:text-muted-foreground
               prose-li:marker:text-primary

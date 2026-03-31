@@ -15,6 +15,9 @@ export const mdxComponents: MDXComponents = {
   p: ({ children }) => (
     <p className="text-muted-foreground leading-relaxed mb-4">{children}</p>
   ),
+  strong: ({ children }) => (
+    <strong className="font-semibold text-foreground">{children}</strong>
+  ),
   ul: ({ children }) => (
     <ul className="list-disc list-inside text-muted-foreground mb-4 space-y-2">
       {children}
